@@ -1,0 +1,76 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Contact\Block\ContactForm $block */
+?>
+<form class="form contact"
+      action="<?= $block->escapeUrl($block->getFormAction()) ?>"
+      id="contact-form"
+      method="post"
+      data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+      data-mage-init='{"validation":{}}'>
+ 
+     <h2>Live Support</h2>
+<div id="LP_DIV_1370363712600">
+
+<div id="LPMbutton-1591872510635-2" class="LPMbutton" style="margin: 0px; padding: 5px 10px; font-style: normal; font-weight: normal; font-variant: normal; list-style: outside none none; letter-spacing: normal; line-height: normal; text-decoration: none; vertical-align: baseline; white-space: normal; word-spacing: normal; position: absolute; background-repeat: repeat-x; background-position: left bottom; cursor: pointer; background-color: #0ab1ff; color: #ffffff; background-image: url('http://lpcdn.lpsnmedia.net/gallery/libraries/chat/images/styles/button_grad_s.png'); font-family: Arial, Helvetica, sans-serif; border-radius: 7px; top: 50px; left: 119px; font-size: 12px; z-index: 601; border: 1px solid #ffffff;">Chat live</div>
+<div id="LPMlabel-1591872510636-3" class="LPMlabel" style="margin: 0px; padding: 0px; border-style: none; border-width: 0px; font-style: normal; font-weight: normal; font-variant: normal; list-style: outside none none; letter-spacing: normal; line-height: normal; text-decoration: none; vertical-align: baseline; white-space: normal; word-spacing: normal; position: absolute; font-family: Tahoma, Geneva, sans-serif; color: #1a1a1a; top: 12px; left: 112px; font-size: 18px; z-index: 602;">Need Help?</div>
+</div>
+
+
+    <fieldset class="fieldset">
+        <legend class="legend"><span><?= $block->escapeHtml(__('Write Us')) ?></span></legend><br />
+        <div class="field note no-label"><?= $block->escapeHtml(__('For large orders or further information about iBottles, please contact us by filling out the form below:')) ?></div>
+        <div class="field name required">
+            <label class="label" for="name"><span><?= $block->escapeHtml(__('Name')) ?></span></label>
+            <div class="control">
+                <input name="name" id="name" title="<?= $block->escapeHtmlAttr(__('Name')) ?>" value="<?= $block->escapeHtmlAttr($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('name') ?: $this->helper(\Magento\Contact\Helper\Data::class)->getUserName()) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field email required">
+            <label class="label" for="email"><span><?= $block->escapeHtml(__('E-MAIL ADDRESS')) ?></span></label>
+            <div class="control">
+                <input name="email" id="email" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" value="<?= $block->escapeHtmlAttr($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('email') ?: $this->helper(\Magento\Contact\Helper\Data::class)->getUserEmail()) ?>" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"/>
+            </div>
+        </div>
+        <div class="field address">
+            <label class="label" for="address"><span><?= $block->escapeHtml(__('Address')) ?></span></label>
+            <div class="control">
+                <textarea name="telephone" id="telephone" title="<?= $block->escapeHtmlAttr(__('Address')) ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"><?= $block->escapeHtml($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('telephone')) ?></textarea>
+            </div>
+        </div>
+        <div class="field comment required">
+            <label class="label" for="comment"><span><?= $block->escapeHtml(__('MESSAGE')) ?></span></label>
+            <div class="control">
+                <textarea name="comment" id="comment" title="<?= $block->escapeHtmlAttr(__('MESSAGE')) ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"><?= $block->escapeHtml($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('comment')) ?></textarea>
+            </div>
+        </div>
+        <?= $block->getChildHtml('form.additional.info') ?>
+    </fieldset>
+
+     <div class="wide">
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="g-recaptcha" data-sitekey="6LfdsKkZAAAAAC6FHwXChy3ZaG42CnuGLfKxoR2z" data-size="compact">
+            </div>
+         
+        </div>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <input type="hidden" name="hideit" id="hideit" value="" />
+            <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="action submit primary">
+                <span><?= $block->escapeHtml(__('Submit')) ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('contact-us-map')->toHtml();
+?>
+
+<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('contact-us-message')->toHtml();
+?>

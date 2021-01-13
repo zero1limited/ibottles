@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<small class="copyright">
+	<div class="copyright-inner">
+		<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('copyright-logo')->toHtml(); ?>
+    	<span><?= $block->escapeHtml($block->getCopyright()) ?></span>
+
+	    <div class="privacyMenu">
+			<ul>
+			  <li>
+				<a href="<?php echo $this->getUrl('privacy-policy'); ?>">Privacy Policy</a>
+			  </li>
+			  <li>
+				<a href="<?php echo $this->getUrl('terms-and-conditions'); ?>">Terms &amp; Conditions</a>
+			  </li>
+			</ul>
+
+	    </div>
+
+		<div class="fig">
+    		<a href="https://fig.agency/" target="_blank"><img  src="<?php echo $this->getViewFileUrl('images/capture.png') ?>" alt="fig"></a>
+		</div>
+
+	</div>
+</small>
+
+
+

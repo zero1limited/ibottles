@@ -1,0 +1,222 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+$store = $storeManager->getStore();
+$mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+
+?>
+
+<div class="reverse">
+
+		<div class="bannersWrapper fade-in one">
+			<div class="homeSlider">
+
+				<div class="singleslide">
+						<div class="wrapper">
+							<img src="<?php echo $mediaUrl ?>banners/iBottles_Due_to_high_demand_web_banner.jpg" alt="Due to high demand: caps, tops and trigger sprays are only available to order with bottles">
+						</div>
+					</div>
+
+					<div class="singleslide">
+						<div class="wrapper">
+							<img src="<?php echo $mediaUrl ?>banners/iBottles_WebBanner_Maintenance.png" alt="Website closed 31st July 2020">
+						</div>
+					</div>
+
+				
+
+					<div id="banner-anim" class="banner-anim">
+						<a href="<?php echo $this->getUrl('') ?>products/postal-containers/initial-white-postal-bottle.html">
+							<img src="<?php echo $mediaUrl ?>banners/animated/background.svg" class="background">
+							<img src="<?php echo $mediaUrl ?>banners/animated/background-products.png" class="banner-layer background-products">
+							<img src="<?php echo $mediaUrl ?>banners/animated/offer.png" class="banner-layer offer">
+							<img src="<?php echo $mediaUrl ?>banners/animated/product.png" class="banner-layer product">
+							<img src="<?php echo $mediaUrl ?>banners/animated/title.png" class="banner-layer title">
+							<div class="banner-layer text-layers">
+								<div class="text-layer text-1">
+									<p>Self-seal lid</p>
+								</div>
+								<div class="text-layer text-2">
+									<p>no heat sealing required</p>
+								</div>
+								<div class="text-layer text-3">
+									<p>ideal for tablets, <br>capsules and powders</p>
+								</div>
+								<div class="text-layer text-4">
+									<p>from as little as 26p <br>each while stocks last</p>
+								</div>
+							</div>
+						</a>
+					</div>
+			</div>
+		</div>
+	</div>
+
+
+
+<script type="text/javascript">
+
+ require(['jquery', 'gsap','slickmin'],function($){
+	
+   
+       
+	   
+	   $(document).ready(function($){
+		
+		
+////////////////////GSAP-5.js//////////////////////////		
+		
+		
+	window.banners = [];
+	banners.push(gsap.timeline());
+	banners.push(gsap.timeline());
+	var bannerHeight = jQuery('.banner-anim').height();
+	var bannerWidth = jQuery('.banner-anim').width();
+
+	$(window).on('load resize', function(){
+		bannerHeight = jQuery('.banner-anim').height();
+		bannerWidth = jQuery('.banner-anim').width();
+	});
+
+	if ( document.getElementById('banner-anim') ) {
+
+		banners[0].add(
+			gsap.from("#banner-anim-2 .title", {
+				opacity: 0,
+				duration: 1.5,
+				ease: "power1.out",
+				delay: 0.2
+			})
+		).add(
+			gsap.from("#banner-anim-2 .product", {
+				x: bannerWidth,
+				duration: 0.5,
+				ease: "power1.out",
+				delay: -0.7
+			})
+		).add(
+			gsap.from("#banner-anim-2 .offer", {
+				y: -bannerHeight,
+				duration: 1,
+				ease: "elastic.out(1, 0.5)",
+				delay: 0.5
+			})
+		);
+
+		banners[1].add(
+			gsap.from("#banner-anim .title", {
+				opacity: 0,
+				duration: 1.5,
+				ease: "power1.out",
+				delay: 1
+			})
+		).add(
+			gsap.from("#banner-anim .product", {
+				x: bannerWidth,
+				duration: 0.5,
+				ease: "power1.out",
+				delay: -0.8
+			})
+		).add(
+			gsap.from("#banner-anim .offer", {
+				y: -bannerHeight,
+				duration: 1,
+				ease: "elastic.out(1, 0.5)",
+				delay: 0
+			})
+		).add(
+			gsap.from("#banner-anim .text-layer.text-1", {
+				y: bannerHeight,
+				duration: 0.4,
+				ease: "back.out(1)",
+				delay: 0
+			})
+		).add(
+			gsap.from("#banner-anim .text-layer.text-2", {
+				y: bannerHeight,
+				duration: 0.4,
+				ease: "back.out(1)",
+				delay: -0.2
+			})
+		).add(
+			gsap.from("#banner-anim .text-layer.text-3", {
+				y: bannerHeight,
+				duration: 0.4,
+				ease: "back.out(1)",
+				delay: -0.2
+			})
+		).add(
+			gsap.from("#banner-anim .text-layer.text-4", {
+				y: bannerHeight,
+				duration: 0.4,
+				ease: "back.out(1)",
+				delay: -0.2
+			})
+		).add(
+			gsap.to("#banner-anim .background-products", {
+				top: -800,
+				duration: 9,
+				ease: "power0.out",
+				delay: 0.5
+			}), 1
+		);
+	}
+
+	$('.homeSlider').on('init', function(event, slick){
+		if ( banners[0] ) {
+			slick.slickSetOption('autoplaySpeed', (banners[0].duration() + 3)*1000);
+			banners[0].seek(0);
+		}
+	});
+	$('.homeSlider').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+		if ( banners[nextSlide] ) {
+			banners[nextSlide].seek(0);
+		}
+	});
+	$('.homeSlider').on('afterChange', function(event, slick, currentSlide){
+		if ( banners[currentSlide] ) {
+			slick.slickSetOption('autoplaySpeed', (banners[currentSlide].duration() + 3)*1000);
+			banners[currentSlide].restart();
+		} else {
+			slick.slickSetOption('autoplaySpeed', 5000);
+		}
+	});
+
+
+		
+////////////////////GSAP-5.js END//////////////////////////	
+		
+		
+		
+	
+		
+		$('.homeSlider').slick({
+			arrows: false,
+			autoplaySpeed: ( banners[0] ? (banners[0].duration() + 3)*1000 : 5000 ),
+			fade: true,
+			autoplay: true,
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			dots: true,
+			responsive: [{
+				breakpoint: 851,
+				settings: {
+					autoplay: false,
+					adaptiveHeight: true
+				}
+			}]
+		});
+		
+		
+	
+		
+	});
+	   
+
+
+ 
+   });
+	
+</script>
+

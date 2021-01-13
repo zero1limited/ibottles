@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Directory:etc/zip_codes.xsd">
+
+    <!-- Specify the country ISO code-->
+     <zip countryCode="GB">
+        <codes>
+            <code id="pattern_1" active="false" example="AB12 3CD">^[a-zA-Z]{2}[0-9]{2}\s?[0-9]{1}[a-zA-Z]{2}$</code>
+            <code id="pattern_2" active="false" example="A1B 2CD">^[a-zA-Z]{1}[0-9]{1}[a-zA-Z]{1}\s?[0-9]{1}[a-zA-Z]{2}$</code>
+            <code id="pattern_3" active="false" example="AB1 2CD">^[a-zA-Z]{2}[0-9]{1}\s?[0-9]{1}[a-zA-Z]{2}$</code>
+            <code id="pattern_4" active="false" example="AB1C 2DF">^[a-zA-Z]{2}[0-9]{1}[a-zA-Z]{1}\s?[0-9]{1}[a-zA-Z]{2}$</code>
+            <code id="pattern_5" active="false" example="A12 3BC">^[a-zA-Z]{1}[0-9]{2}\s?[0-9]{1}[a-zA-Z]{2}$</code>
+            <code id="pattern_6" active="false" example="A1 2BC">^[a-zA-Z]{1}[0-9]{1}\s?[0-9]{1}[a-zA-Z]{2}$</code>
+        </codes>
+    </zip>
+</config>

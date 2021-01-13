@@ -1,0 +1,80 @@
+<?php
+//echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('category-top-content')->toHtml();
+?>
+<?php 
+ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');//get current category
+  $catid= $category->getId();
+   // echo $category->getName();
+   $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+   $mediaUrl =$storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+   
+ 
+  ?>
+  
+    <?php if($catid!=41 && $catid!=46 && $catid!=49) : ?>
+  <div class="page-title-wrapper">
+         <h1 class="page-title" id="page-title-heading" aria-labelledby="page-title-heading toolbar-amount">
+        <span class="base" data-ui-id="page-title-wrapper"><?php echo  $category->getName()  ?></span>    </h1>
+ </div>
+  <?php endif; ?>
+  
+  <?php if($catid==41): ?>
+  
+  <div class="title-banner-wrapper">
+			<div class="title-banner" style="background-image: url('<?php echo $mediaUrl ?>catalog/banner/Banana_Banner-bg.jpg');">
+			<div class="banner-inner">
+
+									<div class="banner-image">
+						<img src="<?php echo $mediaUrl ?>catalog/banner/Banana_Banner-main.png" alt="E LiquidBottles">
+					</div>
+				
+				<div class="banner-text">
+					<h1><small><span>View our growing range of</span></small><span>E Liquid<br>Bottles</span></h1>
+				</div>
+
+			</div>
+		</div>
+	</div>
+  
+  <?php endif ?>
+  
+    <?php if($catid==46): ?>
+  
+  <div class="title-banner-wrapper">
+			<div class="title-banner" style="background-image: url('<?php echo $mediaUrl ?>catalog/banner/Cosmetic_Banner_BG.png');">
+			<div class="banner-inner">
+
+									<div class="banner-image">
+						<img src="<?php echo $mediaUrl ?>catalog/banner/Cosmetic_Banner_FG_1.png" alt="The CosmeticsCollection">
+					</div>
+				
+				<div class="banner-text">
+					<h1><small><span><span style="color: #9b005d;">Discover what’s on offer at</span></span></small><span><span style="color: #d1145a;">The Cosmetics<br>Collection</span></span></h1>
+				</div>
+
+			</div>
+		</div>
+	</div>
+  
+  <?php endif ?>
+  
+    <?php if($catid==49): ?>
+  
+  <div class="title-banner-wrapper">
+			<div class="title-banner" style="background-image: url('<?php echo $mediaUrl ?>/catalog/banner/CBD_Banner_BG.png');">
+			<div class="banner-inner">
+
+									<div class="banner-image">
+						<img src="<?php echo $mediaUrl ?>catalog/banner/CBD_Banner_FG.png" alt="CBD Bottles">
+					</div>
+				
+				<div class="banner-text">
+					<h1><small><span><span style="color: #ffdf42;">Explore our range of</span></span></small><span>CBD Bottles</span></h1>
+				</div>
+
+			</div>
+		</div>
+	</div>
+  
+  <?php endif ?>

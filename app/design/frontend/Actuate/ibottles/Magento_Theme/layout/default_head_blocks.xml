@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <!--  <css src="mage/calendar.css"/>
+        <script src="requirejs/require.js"/>
+        <script src="mage/polyfill.js"/>-->
+        
+        
+         <css src="Custom_Banner::css/custom.css" order="100" />
+     <!--   <css src="Custom_Banner::css/owl.theme.default.css"  />-->
+      <!-- Google Fonts -->
+     <link rel="stylesheet" type="text/css"  src="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800" src_type="url" /> 
+  <link rel="stylesheet" type="text/css"  src="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900" src_type="url" /> 
+        
+    </head>
+   
+</page>

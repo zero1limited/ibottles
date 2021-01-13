@@ -1,0 +1,37 @@
+[20-Jul-2020 09:12:11 UTC] PHP Fatal error:  Allowed memory size of 792723456 bytes exhausted (tried to allocate 32768 bytes) in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php on line 151
+[20-Jul-2020 09:12:11 UTC] PHP Fatal error:  Allowed memory size of 792723456 bytes exhausted (tried to allocate 65536 bytes) in Unknown on line 0
+[20-Jul-2020 09:12:11 UTC] PHP Fatal error:  Uncaught Exception: Warning: session_start(): Failed to decode session object. Session has been destroyed in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php on line 204 in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/App/ErrorHandler.php:61
+Stack trace:
+#0 [internal function]: Magento\Framework\App\ErrorHandler->handler(2, 'session_start()...', '/home/webprevie...', 204, Array)
+#1 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php(204): session_start()
+#2 /home/webpreview/public_html/subdomains/ibottles/generated/code/Magento/Backend/Model/Auth/Session/Interceptor.php(167): Magento\Framework\Session\SessionManager->start()
+#3 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php(141): Magento\Backend\Model\Auth\Session\Interceptor->start()
+#4 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/module-backend/Model/Auth/Se in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/App/ErrorHandler.php on line 61
+[20-Jul-2020 09:12:11 UTC] PHP Fatal error:  Uncaught Exception: Warning: session_start(): Failed to decode session object. Session has been destroyed in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php on line 204 in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/App/ErrorHandler.php:61
+Stack trace:
+#0 [internal function]: Magento\Framework\App\ErrorHandler->handler(2, 'session_start()...', '/home/webprevie...', 204, Array)
+#1 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php(204): session_start()
+#2 /home/webpreview/public_html/subdomains/ibottles/generated/code/Magento/Backend/Model/Auth/Session/Interceptor.php(167): Magento\Framework\Session\SessionManager->start()
+#3 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php(141): Magento\Backend\Model\Auth\Session\Interceptor->start()
+#4 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/module-backend/Model/Auth/Se in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/App/ErrorHandler.php on line 61
+[20-Jul-2020 09:12:11 UTC] PHP Fatal error:  Uncaught Exception: Warning: session_start(): Failed to decode session object. Session has been destroyed in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php on line 204 in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/App/ErrorHandler.php:61
+Stack trace:
+#0 [internal function]: Magento\Framework\App\ErrorHandler->handler(2, 'session_start()...', '/home/webprevie...', 204, Array)
+#1 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php(204): session_start()
+#2 /home/webpreview/public_html/subdomains/ibottles/generated/code/Magento/Backend/Model/Auth/Session/Interceptor.php(167): Magento\Framework\Session\SessionManager->start()
+#3 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php(141): Magento\Backend\Model\Auth\Session\Interceptor->start()
+#4 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/module-backend/Model/Auth/Se in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/App/ErrorHandler.php on line 61
+[20-Jul-2020 09:12:11 UTC] PHP Fatal error:  Uncaught Exception: Warning: session_start(): Failed to decode session object. Session has been destroyed in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php on line 204 in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/App/ErrorHandler.php:61
+Stack trace:
+#0 [internal function]: Magento\Framework\App\ErrorHandler->handler(2, 'session_start()...', '/home/webprevie...', 204, Array)
+#1 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php(204): session_start()
+#2 /home/webpreview/public_html/subdomains/ibottles/generated/code/Magento/Backend/Model/Auth/Session/Interceptor.php(167): Magento\Framework\Session\SessionManager->start()
+#3 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php(141): Magento\Backend\Model\Auth\Session\Interceptor->start()
+#4 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/module-backend/Model/Auth/Se in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/App/ErrorHandler.php on line 61
+[20-Jul-2020 09:12:11 UTC] PHP Fatal error:  Uncaught Exception: Warning: session_start(): Failed to decode session object. Session has been destroyed in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php on line 204 in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/App/ErrorHandler.php:61
+Stack trace:
+#0 [internal function]: Magento\Framework\App\ErrorHandler->handler(2, 'session_start()...', '/home/webprevie...', 204, Array)
+#1 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php(204): session_start()
+#2 /home/webpreview/public_html/subdomains/ibottles/generated/code/Magento/Backend/Model/Auth/Session/Interceptor.php(167): Magento\Framework\Session\SessionManager->start()
+#3 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/Session/SessionManager.php(141): Magento\Backend\Model\Auth\Session\Interceptor->start()
+#4 /home/webpreview/public_html/subdomains/ibottles/vendor/magento/module-backend/Model/Auth/Se in /home/webpreview/public_html/subdomains/ibottles/vendor/magento/framework/App/ErrorHandler.php on line 61

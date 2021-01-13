@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    <add id="Custom_Notifyme::base" title="Notifyme" module="Custom_Notifyme" sortOrder="30" resource="Custom_Notifyme::notifyme"/>
+
+    <add id="Custom_Notifyme::notifyme" title="Notifyme Manager" module="Custom_Notifyme" sortOrder="10" parent="Custom_Notifyme::base" resource="Custom_Notifyme::notifyme_notifyme"/>
+		
+    <add id="Custom_Notifyme::notifyme_notifyme" title="Manage Notifyme" module="Custom_Notifyme" sortOrder="10" parent="Custom_Notifyme::notifyme" action="notifyme/notifyme" resource="Custom_Notifyme::notifyme_notifyme"/>
+    </menu>
+</config>

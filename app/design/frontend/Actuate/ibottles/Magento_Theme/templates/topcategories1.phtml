@@ -1,0 +1,131 @@
+<?php
+
+$k=4;
+?>
+<h5>Choose Your <span>Product Category</span></h5>
+<div class="">
+	<ul class="nav nav-tabs nav-tabs-categories">
+		
+			<li class=" active"><a href="#tab-1" data-toggle="tab"></a></li>
+			
+	</ul>
+	<div class="tab-content" style="overflow: visible;">
+		<?php 
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+   
+            $subCategory = $objectManager->create('Magento\Catalog\Model\Category')->load($k);
+             $subCats = $subCategory->getChildrenCategories();
+   // $_helper = $this->helper('Magento\Catalog\Helper\Output');
+		
+
+			/*Returns comma separated ids*/
+			$subcats = $subCategory->getChildrenCategories(); ?>
+
+			<div class="productSlider" id="tab-<?php echo $k; ?>">
+
+				<?php foreach($subcats as $subCat) {
+					
+
+					$_category = $objectManager->create('Magento\Catalog\Model\Category')->load($subCat->getId());
+					//$_category = $subCat;
+
+				
+
+						$caturl     = '';
+						$catname     = $_category->getName();
+                        $catimg='';
+
+					/*	if( $catimg = Mage::getModel('catalog/category')->load($_category->getID())->getThumbnailImageUrl() ) {
+							$catimg = $catimg;
+						} else {
+							$_first_product = $_category->getProductCollection()->addAttributeToSelect('small_image')->addAttributeToFilter('status', 1)->getFirstItem();
+							$catimg = $this->helper('catalog/image')->init($_first_product, 'small_image')->resize(300,300);
+						}  */ ?>
+						<div class="item">
+							<a href="<?php echo $caturl; ?>" class="item-inner">
+								<div class="product-image" title="<?php echo 'View the products for'; ?> <?php echo $catname; ?> ">
+									<img src="<?php echo $catimg;?>" alt="<?php echo $catname; ?>" />
+
+									<div class="catOverlay">
+										<span>View Category</span>
+									</div>
+
+								</div>
+								<div class="product-item-info">
+									<h2 class="product-name">
+										<?php echo $catname; ?>
+									</h2>
+								</div>
+							</a>
+						</div>
+
+					<?php 
+				} ?>
+
+			</div>
+
+			<div class="productCats" id="tab-<?php echo $k; ?>">
+
+				<?php foreach($subcats as $subCat) {
+					// print_r($subCat);
+					// $subCatid = 1;
+
+						$_category = $objectManager->create('Magento\Catalog\Model\Category')->load($subCat->getId());
+
+					//if($_category->getIsActive()) {
+
+						$caturl      = '';
+						$catname     = $_category->getName();
+                         $catimg='';
+					/*	if( $catimg = Mage::getModel('catalog/category')->load($_category->getID())->getThumbnailImageUrl() ) {
+							$catimg = $catimg;
+						} else {
+							$_first_product = $_category->getProductCollection()->addAttributeToSelect('small_image')->addAttributeToFilter('status', 1)->getFirstItem();
+							$catimg = $this->helper('catalog/image')->init($_first_product, 'small_image')->resize(300,300);
+						}  */ ?>
+
+						<div class="item">
+							<a href="<?php echo $caturl; ?>" class="item-inner">
+								<div class="product-image" title="<?php echo 'View the products for'; ?> <?php echo $catname; ?> ">
+									<img src="<?php echo $catimg;?>" alt="<?php echo $catname; ?>" />
+									<div class="catOverlay">
+										<span>View Category</span>
+									</div>
+
+								</div>
+								<div class="product-item-info">
+									<h2 class="product-name">
+										<?php echo $catname; ?>
+									</h2>
+								</div>
+							</a>
+						</div>
+
+					<?php } ?>
+
+			</div>
+
+		
+	</div>
+
+	
+
+		<div class="showMore">
+			<button class="showMoreButton">Show more categories</button>
+		</div>
+
+	
+
+	<div class="clearfix"></div>
+
+
+	<script>
+	jQuery(document).ready(function(){
+	    jQuery(".showMoreButton").click(function(){
+	        jQuery(".home-content").addClass("morecats");
+	    });
+	});
+	</script>
+
+</div>
+

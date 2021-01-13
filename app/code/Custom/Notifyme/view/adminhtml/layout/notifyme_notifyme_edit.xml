@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Manage Notifyme</title>
+    </head>
+    <body>
+        <referenceBlock name="menu">
+            <action method="setActive">
+                <argument name="itemId" xsi:type="string">Custom_Notifyme::notifyme</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher">
+                <action method="setUseConfirm">
+                    <argument name="params" xsi:type="string">1</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+        <block class="Custom\Notifyme\Block\Adminhtml\Notifyme\Edit" name="notifyme_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+        <block class="Custom\Notifyme\Block\Adminhtml\Notifyme\Edit\Tabs" name="notifyme_edit_tabs">
+            <block class="Custom\Notifyme\Block\Adminhtml\Notifyme\Edit\Tab\Notifyme" name="notifyme_edit_tab_notifyme"/>
+        	<action method="addTab">
+                <argument name="name" xsi:type="string">main_section</argument>
+                <argument name="block" xsi:type="string">notifyme_edit_tab_notifyme</argument>
+            </action>
+        </block>
+        </referenceContainer>
+    </body>
+</page>

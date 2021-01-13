@@ -1,0 +1,42 @@
+	<div class="popularCategories">
+
+					<div class="wrap english">
+						<h5>Don't miss our<span>popular categories</span></h5>
+					</div>
+
+					<?php $popularCategories = array(41, 44, 22, 23);
+                     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+					foreach ( $popularCategories as $popularCategoryId ):
+                    	$_category = $objectManager->create('Magento\Catalog\Model\Category')->load($popularCategoryId);
+                      
+						$caturl      = $_category->getUrl();
+						$catname     = $_category->getName();
+
+                    	if ($_category->getImageUrl()) {
+                          	$catImg = $_category->getImageUrl();
+                          }
+                          else{
+					            $catImg = "";
+					        }
+						
+                        ?>
+
+						<div class="item">
+							<a href="<?php echo $caturl ?>" class="item-inner">
+								<div class="product-image">
+									<img src="<?php echo $catImg;?>" alt="<?php echo $catname; ?>" />
+									<div class="catOverlay">
+										<span><?php echo __('View Category') ?></span>
+									</div>
+								</div>
+								<div class="product-item-info ">
+									<h2 class="product-name">
+										<?php echo $catname; ?>
+									</h2>
+								</div>
+							</a>
+						</div>
+
+					<?php  endforeach ?>
+
+				</div>

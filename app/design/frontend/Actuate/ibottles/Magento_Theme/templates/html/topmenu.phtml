@@ -1,0 +1,166 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Top menu for store
+ *
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+
+// $columnsLimit = $block->getColumnsLimit() ?: 0;
+// $_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit)
+?>
+		
+		<?php 	$topmenuarr=array(47,5,41,46,49,40);
+		        $p[]=array(25,38,39,26,63);
+						$p[]=array(48,23,27,24,28);
+						$p[]=array(65,64,44,29);
+						$p[]=array();
+						
+					$class[]='level0 nav-1 level-top first';
+					$class[]='level0 nav-2 level-top parent';
+					$class[]='level0 nav-3 level-top';
+					$class[]='level0 nav-4 level-top';
+					$class[]='level0 nav-5 level-top';
+					$class[]='specials';
+					
+						$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $_outputhelper    = $this->helper('Magento\Catalog\Helper\Output');
+		?>
+<nav class="navigation" data-action="navigation">
+    <!-- <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>-->
+
+    	<!-- Start Desktop -menu -->
+	
+
+    <ul class="desktop-menu">
+      <?php /*   <?= /* @noEscape */ /* $_menuHtml ?>
+        <?= $block->getChildHtml() */ ?>
+				
+				<?php foreach($topmenuarr as $menuid) :
+				
+				
+				$_category = $objectManager->create('Magento\Catalog\Model\Category')->load($menuid);
+				$caturl     = $_category->getUrl();
+				$catname     = $_category->getName();
+			  if($menuid==40)  $catname ='Offers';
+				if($_category->getIsActive()) {
+					
+				if($menuid!=5) :
+				?>
+
+        <li <?php if($menuid==40) { ?> class="offers" <?php } ?>  ><a href="<?php echo $caturl; ?>"><?php echo $catname; ?></a></li>
+			 <?php else :?>
+			     <li class="hash_child"><a href="<?php echo $caturl; ?>"><?php echo $catname; ?></a>
+			       <div class="megamenu">
+							<?php for($i=0; $i<=3;$i++) {  ?>
+							        <ul>
+												<?php foreach($p[$i] as $id) :
+												   	$_subcategory = $objectManager->create('Magento\Catalog\Model\Category')->load($id);
+														$subcaturl     = $_subcategory->getUrl();
+														$subcatname     = $_subcategory->getName();
+															if($_subcategory->getIsActive()) {
+												?>
+												  <li><a href="<?php echo $subcaturl; ?>"><?php echo $subcatname ; ?></a></li>
+												<?php } endforeach; ?>
+											</ul>	
+							<?php } ?>
+							
+							
+						  </div>
+					 </li>
+			 <?php endif; ?> 
+			<?php } ?>
+			
+			<?php endforeach ?>
+			
+    	<li> <?php echo  $this->getLayout()->getBlock('top.search')->toHtml(); ?></li>
+    </ul>
+<!-- Stop Desktop menu -->
+
+<!-- Start Mobile menu -->
+ 
+		
+		<div class="mobileNavWrapper">
+			<div class="button_container ma-nav-mobile-container hidden-desktop" id="toggle">
+			  <span class="top"></span>
+			  <span class="middle"></span>
+			  <span class="bottom"></span>
+			</div>
+		</div>
+	<div class="overlay" id="overlay">
+		<nav class="overlay-menu">
+			<ul>
+				<?php
+					$k=0;
+				foreach($topmenuarr as $menuid) :
+				$_category = $objectManager->create('Magento\Catalog\Model\Category')->load($menuid);
+				$caturl     = $_category->getUrl();
+				$catname     = $_category->getName();
+				 if($menuid==40)  $catname ='Offers';
+				 	if($_category->getIsActive()) {
+				?>
+				<li class="<?php echo $class[$k] ?>">
+						<a href="<?php echo $caturl; ?>" class="level-top"><span><?php echo $catname; ?></span></a>
+						<?php if($menuid==5) : ?>
+						   <div class="level0 has-side-menu">
+                  <ul class="level0">
+											<?php $j=1; for($i=0; $i<=2;$i++) {
+												   foreach($p[$i] as $id) :
+											      $_subcategory = $objectManager->create('Magento\Catalog\Model\Category')->load($id);
+														$subcaturl     = $_subcategory->getUrl();
+														$subcatname     = $_subcategory->getName();
+											      if($_subcategory->getIsActive()) { 
+											?>
+											<li class="level1 nav-2-<?php echo $j++ ;?> first">
+												<a href="<?php echo $subcaturl ; ?>" class=""><span><?php echo $subcatname ?></span></a>
+											</li>
+											
+											<?php } ;endforeach; } ;  ?>
+									</ul>
+									     
+										
+									 <ul class="level0 side-menu">
+										<?php $j=1;
+										      foreach($p[$i] as $id) :
+											      $_subcategory = $objectManager->create('Magento\Catalog\Model\Category')->load($id);
+														$subcaturl     = $_subcategory->getUrl();
+														$subcatname     = $_subcategory->getName();
+														if($_subcategory->getIsActive()) {
+												?>		
+										   <li class="level1 nav-2-<?php echo $j++ ;?> first">
+													<a href="<?php echo $subcaturl ; ?>" class=""><span><?php echo $subcatname ?></span></a>
+                        </li>
+									<?php }; endforeach; ?> 
+									</ul>
+							 </div>
+								
+						<?php endif ?>
+						
+         </li>
+			<?php }; $k++; endforeach; ?>
+				
+			</ul>
+			</nav>
+		</div>	
+
+
+<!-- Stop Mobile menu -->
+
+
+
+<script>
+	require(['jquery', 'jquery/ui'], function($){
+$(document).ready(function(){
+		$('#toggle').click(function() {
+			$(this).toggleClass('active');
+			$('#overlay').toggleClass('open');
+                        $('.nav-sections').toggleClass('mobile-menu-open');
+		});
+	});
+
+	});
+</script>

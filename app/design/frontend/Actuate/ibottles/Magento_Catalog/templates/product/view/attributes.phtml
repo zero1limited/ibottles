@@ -1,0 +1,53 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product additional attributes template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Attributes
+ */
+?>
+<?php
+    $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+    $_product = $block->getProduct();
+    $product_type = $_product->getTypeId();
+?>
+<?php if ($_additional = $block->getAdditionalData()) :?>
+    <div class="additional-attributes-wrapper table-wrapper">
+        <table class="data table additional-attributes" id="product-attribute-specs-table">
+            <caption class="table-caption"><?= $block->escapeHtml(__('More Information')) ?></caption>
+            <tbody>
+            <?php foreach ($_additional as $_data) :
+                if ( $_data['label'] === 'SKU' && $product_type === 'configurable' ) {
+                    continue;
+                } ?>
+
+                <tr>
+                    <th class="col label" scope="row"><?= $block->escapeHtml($_data['label']) ?></th>
+                    <td class="col data" data-th="<?= $block->escapeHtmlAttr($_data['label']) ?>"><?= /* @noEscape */ $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+                </tr>
+
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+
+              <?php
+                 $product_demonstration = $_product->getResource()->getAttribute('product_demonstration')->getFrontend()->getValue($_product);
+                         if(!empty($product_demonstration))
+                            {
+              ?>
+            <div class="demonstration">
+                <h2>PRODUCT DEMONSTRATION</h2>
+
+                 <?php echo $product_demonstration; ?>
+
+            </div>
+        <?php }?>
+    </div>
+<?php endif;?>
+

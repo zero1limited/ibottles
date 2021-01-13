@@ -1,0 +1,222 @@
+<div class="catbanner"><?php
+echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('new_arival')->toHtml();?>
+</div>
+
+<?php
+
+/* File Location
+
+* /new/app/design/frontend/base/default/template/catalog/navigation
+
+* Compatible with: Magento Community 1.7.2.0
+
+*/
+$ids = array(
+		5 => '<h5>Choose Your <span>Product Category</span></h5>'
+);
+$sub_folder = "";
+$sub = explode("/", $_SERVER['SCRIPT_NAME']);
+if(count($sub) > 2) {
+	$sub_folder = $sub[1]."/";
+}
+//$sub_folder = "/".reset(explode("/", $_SERVER['SCRIPT_NAME']));
+?>
+
+<div class="">
+	<ul class="nav nav-tabs nav-tabs-categories">
+		<?php $x = 0;
+		foreach ($ids as $k => $v) {
+			?>
+			<li class="<?php echo ($x == 0 ? " active" : "");?>"><a href="#tab-<?php echo $k; ?>" data-toggle="tab"><?php echo $v; ?></a></li>
+			<?php
+			$x = 1;
+		} ?>
+	</ul>
+	<div class="tab-content" style="overflow: visible;">
+		<?php $x = 0;
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $_outputhelper    = $this->helper('Magento\Catalog\Helper\Output');
+		
+		
+    
+		foreach($ids as $k => $v) {
+
+			/* Load category by id*/
+			$cat = $objectManager->create('Magento\Catalog\Model\Category')->load($k);
+
+			/*Returns comma separated ids*/
+			$subcats = $cat->getChildrenCategories(); ?>
+
+			
+
+			<div class="productSlider" id="tab-<?php echo $k; ?>">
+				<ul id="product_slider"  class="owl-carousel owl-theme">
+				<?php foreach($subcats as $subCat) {
+					// print_r($subCat);
+					// $subCatid = 1;
+					if($subCat->getId()==40 || $subCat->getId()==23 || $subCat->getId()==47) continue;
+
+						
+					$_category = $objectManager->create('Magento\Catalog\Model\Category')->load($subCat->getId());
+					//$_category = $subCat;
+
+					if($_category->getIsActive()) {
+
+						$caturl     = $_category->getUrl();
+						$catname     = $_category->getName();
+                     // $imageBlock = $block->getLayout()->createBlock('Magento\Catalog\Block\Category\ListProduct');
+
+					 /*  if ($_imgUrl = $_category->getImageUrl()) {
+                               $_imgHtml = $catimg; }
+                          else {   $catimg=''; }
+                        */
+
+                          if ($_category->getImageUrl()) {
+                          	$catImg = $_category->getImageUrl();
+                          }
+                          else{
+					            $catImg = "";
+					        }
+                    
+                    ?>
+                    	
+						<li>
+							<a href="<?php echo $caturl; ?>" class="item-inner">
+									<img src="<?php echo $catImg;?>" alt="<?php echo $catname; ?>" width="260" height="260"/>
+
+									<div class="catOverlay">
+										<span>View Category</span>
+									</div>
+
+							
+								<div class="product-item-info">
+									<h2 class="product-name">
+										<?php echo $catname; ?>
+									</h2>
+								</div>
+							</a>
+						</li>
+
+					<?php } 
+				} ?>
+				</ul>
+			</div>
+		
+
+
+			<div class="productCats" id="tab-<?php echo $k; ?>">
+				
+				<?php $i=0; foreach($subcats as $subCat) {  $i++;
+					// print_r($subCat);
+					// $subCatid = 1;
+					
+						if($subCat->getId()==40 || $subCat->getId()==23 || $subCat->getId()==47) continue;
+
+					$_category = $objectManager->create('Magento\Catalog\Model\Category')->load($subCat->getId());
+					//$_category = $subCat;
+
+					if($_category->getIsActive()) {
+
+						$caturl      = $_category->getUrl();
+						$catname     = $_category->getName();
+
+				/*	 if ($_imgUrl = $_category->getImageUrl()) {
+                               $_imgHtml = $catimg; }
+                          else {   $catimg=''; }
+                          */
+                    	if ($_category->getImageUrl()) {
+                          	$catImg = $_category->getImageUrl();
+                          }
+                          else{
+					            $catImg = "";
+					        }
+							
+						$imageResizer = $block->getImageResizer();
+                       $resizedImageUrl = $imageResizer->resizeAndGetUrl($catImg, 260, 260); 	
+							
+							
+
+                    ?>
+                    	
+						<div  <?php if( $i>8 ) { ?>class="item morecat" <?php } else {?> class="item" <?php } ?> >
+							<a href="<?php echo $caturl; ?>" class="item-inner">
+								<div class="product-image" title="<?php echo $block->escapeHtml(__('View the products for')); ?> <?php echo $catname; ?> <?php echo $block->escapeHtml(__('category')); ?>">
+									<img src="<?php echo $resizedImageUrl;?>" alt="<?php echo $catname; ?>" width="260" height="260" />
+									<div class="catOverlay">
+										<span>View Category</span>
+									</div>
+
+								</div>
+								<div class="product-item-info">
+									<h2 class="product-name">
+										<?php echo $catname; ?>
+									</h2>
+								</div>
+							</a>
+						</div>
+						
+
+					<?php }
+				} ?>
+
+			</div>
+
+			<?php
+			$x = 1;
+		} ?>
+	</div>
+
+
+
+	
+
+		<div class="showMore">
+			<button class="showMoreButton" id="showMoreButton">Show more categories</button>
+		</div>
+
+
+
+
+	<div class="clearfix"></div>
+
+
+	<script>
+require(['jquery', 'jquery/ui'], function($){
+	$(document).ready(function(){
+		$(".morecat").css("display","none");
+	    $(".showMoreButton").click(function(){ 
+	        $(".morecat").css("display","inline-block");
+			 $(".showMoreButton").css("display","none");
+	    });
+	});
+		});
+	</script>
+	<script type="text/javascript">
+require(['jquery', 'bannersliderLib'],function($){
+    $(function() {
+        $('#product_slider').owlCarousel({
+          loop:true,
+          nav:true,
+          autoplay: true,
+          dots:false,
+          margin: 22,
+          navText: ['<i class="fa fa-caret-left" aria-hidden="true"></i>','<i class="fa fa-caret-right" aria-hidden="true"></i>'],
+          responsive:{
+              0:{
+                  items:2
+              },
+        
+              700:{
+                  items:2
+              },
+              1000:{
+                  items:3
+              }
+          }
+        });
+    });
+});
+</script>
+
+</div>

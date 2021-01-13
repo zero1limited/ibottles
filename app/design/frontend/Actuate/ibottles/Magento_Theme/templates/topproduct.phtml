@@ -1,0 +1,53 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$_imagehelper = $objectManager->get('Magento\Catalog\Helper\Image');
+$abstractProductBlock = $block->getLayout()->createBlock('\Magento\Catalog\Block\Product\AbstractProduct');
+$categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory');
+$categoryHelper = $objectManager->get('\Magento\Catalog\Helper\Category');
+$categoryRepository = $objectManager->get('\Magento\Catalog\Model\CategoryRepository');
+$store = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+
+$categoryId = 45; // YOUR CATEGORY ID
+$category = $categoryFactory->create()->load($categoryId);
+
+$categoryProducts = $category->getProductCollection()
+                             ->addAttributeToSelect('*');
+    //->setPageSize(5);
+    if(count($categoryProducts) > 0){
+    ?>
+    <h3 class="pro-header">TAKE A LOOK AT OUR <strong>TOP PRODUCTS</strong></h3>
+    
+    <div >
+        <ul>
+        <?php
+        foreach ($categoryProducts as $product){
+            $_product = $objectManager->create('Magento\Catalog\Model\Product')->load($product->getid());
+        ?>
+        
+        <li class="item">
+
+            <?php
+                $productImageUrl = $_imagehelper->init($_product, 'small_image', ['type'=>'small_image'])->keepAspectRatio(true)->resize('260','260')->getUrl();
+                ?>
+    
+            <a href="<?php echo $_product->getProductUrl() ?>" class="product-image"><img src="<?php echo $productImageUrl; ?>" alt="<?php echo $_product->getName();?>" width="270" height="270" /></a>
+            <a href="<?php echo $_product->getProductUrl() ?>" class="product-name"><span class="prod-name"><?php echo $_product->getName();?></span></a>
+            <p>
+                           <?php $size= $_product->getbottle_sizes();
+                             echo  $size ?> </p>
+            <span class="product-price"><?php echo $abstractProductBlock->getProductPrice($product) ?></span>
+           <span class="buy-now"><a href="<?php echo $_product->getProductUrl() ?>">Buy Now</a></span>
+            
+        </li>
+        
+        <?php
+        }
+        ?>
+        </ul>
+    </div>
+    
+    <?php
+    }
+    ?>
+    
+   

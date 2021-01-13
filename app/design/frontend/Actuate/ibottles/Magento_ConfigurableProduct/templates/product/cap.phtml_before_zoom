@@ -1,0 +1,194 @@
+<?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product
+    $pid= $product->getId();
+    $finalPrice=$product->getFinalPrice();
+    
+    
+     $storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface'); 
+    $currencyCode = $storeManager->getStore()->getCurrentCurrencyCode(); 
+    $currency = $objectManager->create('Magento\Directory\Model\CurrencyFactory')->create()->load($currencyCode); 
+     $currencySymbol = $currency->getCurrencySymbol();
+       $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+    $url=$storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+    
+  ?>  
+<div>
+    <input type="hidden" id="reset-price" value="0">
+    <input type="hidden" id="selcap-price" value="0">
+<h2 id="sel-cap">*Select your cap</h2>
+  <div id="updateBox">Cap options will appear once you have selected your other options above</div>
+  
+   <div id="selectedBox" style="display: none;" >
+    
+    <div id="img-box" ></div>
+      <div id="nmr"></div>
+      <!-- <div id="prr"></div>
+       <div class="vat">+VAT</div>-->
+       <div class="change"><a href="javascript:void(0)" id="change"> Change</a></div>
+        
+   </div>  
+
+</div>
+
+
+
+<script type="text/javascript">
+require(["jquery"], function(jQuery) {
+    
+  
+    
+ jQuery(".product-options-wrapper select[id^='attribute']").last().on('change', function() {
+      setTimeout(function (){
+        simpleId=jQuery("input[name=selected_configurable_option]").val();
+       // alert(simpleId);
+    jQuery("#updateBox").html('');
+       jQuery("#selectedBox").css("display", "none");
+       jQuery("#updateBox").css("display", "block");
+       document.getElementById("related-products-field").value = '';
+       
+       
+        jQuery.ajax({
+        url: "<?php echo $url ?>banner/index",
+        type: "post",
+        data: {simpleId: simpleId},
+        success: function (response) {
+
+            jQuery("#updateBox").html(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+  
+         
+                 });
+        
+      }, 500);    
+      
+      
+     });
+ 
+ ///// Tier price calculation 
+ 
+jQuery('#qty').bind('input', function() {
+    
+    
+    tirePriceCalculation();
+     
+});
+ 
+ 
+ function tirePriceCalculation()
+    {
+        simpleId1=jQuery("input[name=selected_configurable_option]").val();
+       if(simpleId1){
+       express_qty=jQuery('#qty').val();
+       cap_price=jQuery('#selcap-price').val();
+      
+        jQuery.ajax({
+        url: "<?php echo $url ?>banner/index/express",
+        type: "post",
+        data: {simpleId1: simpleId1,express_qty:express_qty,cap_price:cap_price},
+        success: function (response) {
+
+          res= response;
+            jQuery("#price2").html(res);
+            
+              var str='<span class="price"><?php echo $currencySymbol ?>'+ document.getElementById("price2").innerHTML+'</span>'
+              document.getElementById("product-price-<?php echo $pid ?>").innerHTML=str;
+              document.getElementById("reset-price").value=res;
+            
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+  
+         
+                 });
+        
+        
+       }
+        
+    }
+ 
+ 
+ 
+  jQuery(".product-options-wrapper select[id^='attribute']").on('change', function(){
+     setTimeout(function (){
+       var str=document.getElementById("product-price-<?php echo $pid ?>").innerHTML;
+          var res=str.replace('<?php echo $currencySymbol ?>','');
+            
+           res=res.replace('<span class="price">','');
+              res=res.replace('</span>','');
+           document.getElementById("price2").innerHTML=res;
+            }, 500);    
+     });
+ 
+ 
+ 
+ 
+ 
+   
+      jQuery("#change").click(function() { 
+
+        jQuery("#selectedBox").css("display", "none");
+       jQuery("#updateBox").css("display", "block");
+       document.getElementById("related-products-field").value = '';
+        document.getElementById("selcap-price").value = '0';
+        tirePriceCalculation();
+        //document.getElementById("price2").innerHTML=<?php echo $finalPrice ?>;
+        
+        document.getElementById("price2").innerHTML=document.getElementById("reset-price").value;
+        var str='<span class="price"><?php echo $currencySymbol ?>'+ document.getElementById("price2").innerHTML+'</span>'
+        document.getElementById("product-price-<?php echo $pid ?>").innerHTML=str;
+         document.getElementById("sel-cap").innerHTML= '*Select your cap';
+       
+   
+      });
+   
+   
+   
+   
+
+    
+    });
+    
+    
+      
+     function getCap(id)
+        {
+            //alert(id);
+            document.getElementById("updateBox").style.display = "none";
+            document.getElementById("selectedBox").style.display = "block";
+           
+            
+                var price_string="  Cost: "+document.getElementById("price-"+id).innerHTML;
+           
+              document.getElementById("nmr").innerHTML= document.getElementById("nm-"+id).innerHTML + price_string ;
+            
+                document.getElementById("sel-cap").innerHTML= 'Selected Cap :';
+              
+              document.getElementById("img-box").innerHTML=document.getElementById("img-"+id).innerHTML;
+            
+            var cap_price=document.getElementById("price-"+id).innerHTML.substring(1);
+             document.getElementById("selcap-price").value=cap_price;
+            
+            document.getElementById("reset-price").value=parseFloat(document.getElementById("price2").innerHTML);
+            
+             var price_2=parseFloat(document.getElementById("price2").innerHTML)+parseFloat(cap_price);
+             
+            
+             
+             document.getElementById("price2").innerHTML=parseFloat(price_2).toFixed(2);
+             
+             var str='<span class="price"><?php echo $currencySymbol ?>'+ document.getElementById("price2").innerHTML+'</span>'
+             
+             document.getElementById("product-price-<?php echo $pid ?>").innerHTML=str;
+             
+             document.getElementById("related-products-field").value = id;
+           
+        }
+    
+    
+    
+    </script>
+

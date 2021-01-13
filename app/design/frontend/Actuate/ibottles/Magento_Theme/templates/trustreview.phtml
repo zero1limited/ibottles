@@ -1,0 +1,9 @@
+<?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$request = $objectManager->get('Magento\Framework\App\Action\Context')->getRequest();
+if ($request->getFullActionName() == 'cms_index_index') { ?>
+
+
+<div id="trustpilot-widget-trustbox-1-wrapper" style="z-index: 1000; clear: both; margin: 11px 0px 11px 0px;">
+<div id="trustpilot-widget-trustbox-1" class="trustpilot-widget" style="z-index: 1000 !important; position: relative;" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="5e31dacf25f2ea0001341b61" data-style-height="52px" data-style-width="100%"><iframe style="position: relative; height: 52px; width: 100%; border-style: none; display: block; overflow: hidden;" title="Customer reviews powered by Trustpilot" src="https://widget.trustpilot.com/trustboxes/56278e9abfbbba0bdcd568bc/index.html?templateId=56278e9abfbbba0bdcd568bc&amp;businessunitId=5e31dacf25f2ea0001341b61#locale=en-US&amp;styleHeight=52px&amp;styleWidth=100%25" scrolling="no" frameborder="0"></iframe></div>
+</div>
+<?php } ?>

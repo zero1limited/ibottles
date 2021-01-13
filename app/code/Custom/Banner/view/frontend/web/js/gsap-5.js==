@@ -1,0 +1,116 @@
+(function(){
+	window.banners = [];
+	banners.push(gsap.timeline());
+	banners.push(gsap.timeline());
+	var bannerHeight = jQuery('.banner-anim').height();
+	var bannerWidth = jQuery('.banner-anim').width();
+
+	jQuery(window).on('load resize', function(){
+		bannerHeight = jQuery('.banner-anim').height();
+		bannerWidth = jQuery('.banner-anim').width();
+	});
+
+	if ( document.getElementById('banner-anim') ) {
+
+		banners[0].add(
+			gsap.from("#banner-anim-2 .title", {
+				opacity: 0,
+				duration: 1.5,
+				ease: "power1.out",
+				delay: 0.2
+			})
+		).add(
+			gsap.from("#banner-anim-2 .product", {
+				x: bannerWidth,
+				duration: 0.5,
+				ease: "power1.out",
+				delay: -0.7
+			})
+		).add(
+			gsap.from("#banner-anim-2 .offer", {
+				y: -bannerHeight,
+				duration: 1,
+				ease: "elastic.out(1, 0.5)",
+				delay: 0.5
+			})
+		);
+
+		banners[1].add(
+			gsap.from("#banner-anim .title", {
+				opacity: 0,
+				duration: 1.5,
+				ease: "power1.out",
+				delay: 1
+			})
+		).add(
+			gsap.from("#banner-anim .product", {
+				x: bannerWidth,
+				duration: 0.5,
+				ease: "power1.out",
+				delay: -0.8
+			})
+		).add(
+			gsap.from("#banner-anim .offer", {
+				y: -bannerHeight,
+				duration: 1,
+				ease: "elastic.out(1, 0.5)",
+				delay: 0
+			})
+		).add(
+			gsap.from("#banner-anim .text-layer.text-1", {
+				y: bannerHeight,
+				duration: 0.4,
+				ease: "back.out(1)",
+				delay: 0
+			})
+		).add(
+			gsap.from("#banner-anim .text-layer.text-2", {
+				y: bannerHeight,
+				duration: 0.4,
+				ease: "back.out(1)",
+				delay: -0.2
+			})
+		).add(
+			gsap.from("#banner-anim .text-layer.text-3", {
+				y: bannerHeight,
+				duration: 0.4,
+				ease: "back.out(1)",
+				delay: -0.2
+			})
+		).add(
+			gsap.from("#banner-anim .text-layer.text-4", {
+				y: bannerHeight,
+				duration: 0.4,
+				ease: "back.out(1)",
+				delay: -0.2
+			})
+		).add(
+			gsap.to("#banner-anim .background-products", {
+				top: -800,
+				duration: 9,
+				ease: "power0.out",
+				delay: 0.5
+			}), 1
+		);
+	}
+
+	jQuery('.homeSlider').on('init', function(event, slick){
+		if ( banners[0] ) {
+			slick.slickSetOption('autoplaySpeed', (banners[0].duration() + 3)*1000);
+			banners[0].seek(0);
+		}
+	});
+	jQuery('.homeSlider').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+		if ( banners[nextSlide] ) {
+			banners[nextSlide].seek(0);
+		}
+	});
+	jQuery('.homeSlider').on('afterChange', function(event, slick, currentSlide){
+		if ( banners[currentSlide] ) {
+			slick.slickSetOption('autoplaySpeed', (banners[currentSlide].duration() + 3)*1000);
+			banners[currentSlide].restart();
+		} else {
+			slick.slickSetOption('autoplaySpeed', 5000);
+		}
+	});
+})();

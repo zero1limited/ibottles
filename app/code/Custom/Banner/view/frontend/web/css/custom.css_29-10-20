@@ -1,0 +1,64 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap');
+
+.page-print .page-title-wrapper {margin: 0;}
+.page-print .page-title-wrapper .page-title {display: none;}
+.page-print .page-title-wrapper .invprint:after {content: ""; display: table; clear: both;}
+.page-print .page-title-wrapper .invprint .logo {float: left; margin: 0 !important;}
+.page-print .page-title-wrapper .invprint .address {float: right; line-height: normal; font-family: "Time New Roman"; text-align: right;}
+.page-print .page-title-wrapper .invprint .address p {font-size: 18px;}
+.page-print .order-details-items.invoice {border-bottom: 0;}
+.page-print .order-details-items.invoice .block1 .order-title {background: #737373; padding: 14px 20px; line-height: normal;}
+.page-print .order-details-items.invoice .block1 .order-title p {color: #fff; font-family: "Time New Roman"; font-size: 18px; margin-bottom: 5px;}
+.page-print .order-details-items.invoice .block1 .order-title p:last-child {margin-bottom: 0;}
+
+.page-print .order-details-items.invoice table:not(.table-order-items) {font-family: "Time New Roman"; font-size: 18px; border: 1px solid #808080; color: #000; border-collapse: collapse;}
+.page-print .order-details-items.invoice table:not(.table-order-items) tbody tr td {padding: 8px 20px; width: 50%;}
+.page-print .order-details-items.invoice table:not(.table-order-items) tbody tr:first-child td {background: #edebeb; font-size: 22px; font-weight: bold; border-bottom: 1px solid #808080;}
+.page-print .order-details-items.invoice table:not(.table-order-items) tbody tr:first-child td:first-child {border-right: 1px solid #808080;}
+.page-print .order-details-items.invoice .block2 table {margin: 10px 0 25px;}
+
+.page-print .order-details-items.invoice table.table-order-items {color: #000; font-family: "Time New Roman"; font-size: 18px;}
+.page-print .order-details-items.invoice table.table-order-items thead tr {border: 1px solid #808080;}
+.page-print .order-details-items.invoice table.table-order-items thead tr th {border-bottom: 0; background: #edebeb; font-size: 18px; font-weight: normal; padding: 3px 8px;}
+.page-print .order-details-items.invoice table.table-order-items thead tr th:first-child {padding-left: 20px; width: 40%;}
+.page-print .order-details-items.invoice table.table-order-items tfoot tr:first-child th {padding-top: 20px;}
+.page-print .order-details-items.invoice table.table-order-items tfoot tr th {border-top: 0; padding-bottom: 0; padding-top: 0; font-size: 20px; font-weight: bold;}
+.page-print .order-details-items.invoice table.table-order-items strong {font-family: "Time New Roman"; font-size: 18px; color: #000 !important; margin: 0;}
+
+.page-print .order-details-items.invoice table.table-order-items tbody tr td:first-child {padding-left: 20px;}
+.page-print .order-details-items.invoice table.table-order-items tfoot tr:first-child td {padding-top: 20px;}
+.page-print .order-details-items.invoice table.table-order-items tfoot tr td {border-top: 0; padding-bottom: 0; padding-top: 0; font-size: 20px; font-weight: bold;}
+.page-print .order-details-items.invoice table.table-order-items tfoot strong {font-size: 20px;}
+.page-print .order-details-items.invoice table.table-order-items tbody tr td span {line-height: normal; display: inline-block;}
+
+.page-print .order-details-items.invoice table.table-order-items.invoice .grand_total,
+.page-print .order-details-items.invoice table.table-order-items.invoice .shipping_incl {display: none;}
+
+
+.product-options-wrapper .stockalert {background: #f5f5f5; border: 1px solid #dddddd; padding: 20px; box-sizing: border-box;}
+.product-options-wrapper .stockalert .bss_productstockaler .other_info {font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 600; line-height: normal;}
+.product-options-wrapper .stockalert .bss_productstockaler .other_info:after {content: ""; display: table; clear: both;}
+.product-options-wrapper .stockalert .bss_productstockaler .other_info img {float: left; margin-bottom: 30px;}
+.product-options-wrapper .stockalert .bss_productstockaler .other_info .p-name {float: right; width: calc(100% - 165px); text-align: left;}
+.product-options-wrapper .stockalert .bss_productstockaler .other_info .prc {display: block; margin-top: 15px; font-size: 25px; color: #115B9B; font-weight: 700; float: right; width: calc(100% - 165px); text-align: left; clear: right;}
+.product-options-wrapper .stockalert .bss_productstockaler .field {margin-bottom: 30px;}
+.product-options-wrapper .stockalert .bss_productstockaler .field .control .input-text {max-width: 370px; height: 32px;}
+.product-options-wrapper .stockalert .bss_productstockaler .actions-toolbar {margin-left: 0 !important;}
+
+.product-options-wrapper .modal {position: fixed; left: 0; top: 0; z-index: 20000; width: 100%; height: 100%; background: rgba(0,0,0,0.4);}
+.product-options-wrapper .modal-content {background: #fff; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); max-width: 600px; width: 100%; padding: 20px; box-sizing: border-box;}
+.product-options-wrapper .modal-content h2 {font-size: 30px !important; font-weight: 500; margin-top: 0;}
+.product-options-wrapper .modal-content .prod-name {font-family: 'Barlow Condensed', sans-serif; font-size: 20px; line-height: normal; font-weight: 500;}
+.product-options-wrapper .modal-content .button-set {text-align: center; margin-top: 20px;}
+.product-options-wrapper .modal-content .button-set a { background: #26a9e0 !important; border: 0 !important; font: 400 16px 'Barlow Condensed', sans-serif !important; padding: 8px 35px 10px 20px !important; border-radius: 30px !important; text-transform: uppercase !important; position: relative; text-align: left; color: #fff; letter-spacing: 1px; display: inline-block; transition: 0.3s ease;}
+.product-options-wrapper .modal-content .button-set a:hover {background: #598db9 !important;}
+.product-options-wrapper .modal-content .button-set a:after {content: ""; right: 7px; top: 0; background-repeat: no-repeat; z-index: 10; bottom: 0; position: absolute; width: 20px; height: 20px; margin: auto; background: url(../images/rightWhiteArrow.svg);}
+.product-options-wrapper .modal-content .close {position: absolute; right: 10px; top: 10px; background: #ef3e36; color: #fff; padding: 0 5px; cursor: pointer; transition: 0.3s ease; font-family: 'Barlow Condensed', sans-serif;}
+.product-options-wrapper .modal-content .close:hover {background: #404041;}
+.product-options-wrapper .modal-content .close span {font-size: 25px; vertical-align: top; line-height: 20px; height: 20px;}
+.top-categories .catbanner {text-align: center;}
+@media (max-width: 767px) {
+	.product-options-wrapper .modal-content {max-width: none; width: calc(100% - (15px * 2));}
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="columns.top">
+            <container name="category.view.container" htmlTag="div" htmlClass="category-view" after="-">
+                <block class="Magento\Catalog\Block\Category\View" name="category.image" template="Magento_Catalog::category/image.phtml"/>
+
+                <block class="Magento\Framework\View\Element\Template" name="test_file" template="Magento_Catalog::category_banner.phtml"/>
+                
+              
+                <block class="Magento\Catalog\Block\Category\View" name="category.cms" template="Magento_Catalog::category/cms.phtml"/>
+            </container>
+        </referenceContainer>
+    <referenceContainer name="content">
+             <block class="Magento\Catalog\Block\Category\View" name="category.description" before="category.products" template="Magento_Catalog::category/description.phtml"/>
+      </referenceContainer>
+
+        <referenceContainer name="sidebar.additional">
+     <block class="Magento\Framework\View\Element\Template" name="live-support" template="Magento_Catalog::sidebar.phtml"/>
+</referenceContainer>
+        <referenceBlock name="category.image" remove="true"/>
+        <referenceBlock name="page.main.title" remove="true"/>
+    </body>
+</page>

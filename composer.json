@@ -1,0 +1,106 @@
+{
+    "name": "magento/project-community-edition",
+    "description": "eCommerce Platform for Growth (Community Edition)",
+    "type": "project",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "require": {
+        "amasty/amcart": "^1.9",
+        "amasty/base": "^1.10.10",
+        "amasty/cart": "^1.9",
+        "amasty/customers-also-viewed-graphql": "^1.0",
+        "amasty/feed": "^2.6",
+        "amasty/mega-menu": "^1.7",
+        "amasty/mega-menu-graphql": "^1.0",
+        "amasty/module-elastic-search": "^1.8",
+        "amasty/module-gdpr": "^2.0",
+        "amasty/module-loyalty-program": "^2.7",
+        "amasty/module-mass-order-actions": "^1.5",
+        "amasty/module-page-speed-optimizer": "^1.8",
+        "amasty/module-seo-toolkit": "^1.16",
+        "amasty/module-single-step-checkout": "^3.0.9",
+        "amasty/module-special-promo-pro": "^2.8",
+        "amasty/mostviewed": "^2.9",
+        "amasty/paction": "^1.1",
+        "amasty/promo": "^2.9",
+        "amasty/rewards": "^1.14",
+        "amasty/rgrid": "^1.0",
+        "amasty/shopby": "^2.14",
+        "amasty/smtp": "^1.1",
+        "amasty/sorting": "^2.8",
+        "magento/product-community-edition": "2.3.5-p1",
+        "stripe/stripe-payments": "^1.9",
+        "stripe/stripe-php": "^7"
+    },
+    "require-dev": {
+        "allure-framework/allure-phpunit": "~1.2.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+        "friendsofphp/php-cs-fixer": "~2.14.0",
+        "lusitanian/oauth": "~0.8.10",
+        "magento/magento-coding-standard": "*",
+        "magento/magento2-functional-testing-framework": "~2.6.4",
+        "pdepend/pdepend": "2.5.2",
+        "phpcompatibility/php-compatibility": "^9.3",
+        "phpmd/phpmd": "@stable",
+        "phpstan/phpstan": "^0.12.2",
+        "phpunit/phpunit": "~6.5.0",
+        "sebastian/phpcpd": "~3.0.0",
+        "squizlabs/php_codesniffer": "~3.4.0"
+    },
+    "conflict": {
+        "gene/bluefoot": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Magento\\Framework\\": "lib/internal/Magento/Framework/",
+            "Magento\\Setup\\": "setup/src/Magento/Setup/",
+            "Magento\\": "app/code/Magento/",
+            "Zend\\Mvc\\Controller\\": "setup/src/Zend/Mvc/Controller/"
+        },
+        "psr-0": {
+            "": [
+                "app/code/",
+                "generated/code/"
+            ]
+        },
+        "files": [
+            "app/etc/NonComposerComponentRegistration.php"
+        ],
+        "exclude-from-classmap": [
+            "**/dev/**",
+            "**/update/**",
+            "**/Test/**"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
+            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/",
+            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/",
+            "Magento\\PhpStan\\": "dev/tests/static/framework/Magento/PhpStan/"
+        }
+    },
+    "version": "2.3.5-p1",
+    "minimum-stability": "stable",
+    "repositories": {
+        "0": {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        },
+        "amasty": {
+            "type": "composer",
+            "url": "https://composer.amasty.com/community/"
+        }
+    },
+    "extra": {
+        "magento-force": "override"
+    }
+}

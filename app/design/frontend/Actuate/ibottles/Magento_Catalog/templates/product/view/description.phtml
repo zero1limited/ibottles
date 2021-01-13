@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product description template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Description
+ */
+?>
+<div class="product-collateral">
+
+<div class="product-tabs-content" id="product_tabs_description_contents">
+	<div class="description-left">
+	    <h2>Product Overview</h2>
+		<?= /* @noEscape */ $this->helper(Magento\Catalog\Helper\Output::class)->productAttribute(
+    $block->getProduct(),
+    $block->getProduct()->getDescription(),
+    'description'
+) ?>
+        </div>
+	<div class="description-right">
+		<div class="std">
+	       
+            <?= /* @noEscape */ $this->helper(Magento\Catalog\Helper\Output::class)->productAttribute(
+    $block->getProduct(),
+    $block->getProduct()->getDescriptionRight(),
+    'description'
+) ?>
+            
+            </div>
+        </div>
+</div>
+</div>
+
+
+<?php //$description_right = $_product->getResource()->getAttribute('description_right')->getFrontend()->getValue($_product); ?>
+

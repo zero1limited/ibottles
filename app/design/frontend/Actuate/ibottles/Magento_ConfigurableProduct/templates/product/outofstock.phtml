@@ -1,0 +1,223 @@
+<?php $objectManager= \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$_product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+ $url=$storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+  $_imageHelper = $objectManager->get('\Magento\Catalog\Helper\Image');
+  $priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data'); 
+$staus  =0;
+
+$configProduct = $objectManager->create('Magento\Catalog\Model\Product')->load($_product->getId());
+
+if($configProduct->getIsNotificationEnabled()) : 
+
+$resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+$connection = $resource->getConnection();
+
+
+$sql="SELECT * FROM `ibtl_catalog_product_relation` WHERE `parent_id` =". $_product->getId();
+
+$_children=$connection->query($sql);
+
+
+//$_children = $configProduct->getTypeInstance()->getUsedProducts($configProduct);
+
+
+
+$flag=0;
+$cId=array();
+$outproduct=array();
+$imageUrl=array();
+$price=array();
+
+foreach ($_children as $child){
+   $cId[]=$child['child_id'];
+    
+    $stockItem = $objectManager->get('\Magento\CatalogInventory\Api\StockRegistryInterface');
+$productId = $child['child_id']; // YOUR PRODUCT ID
+$productStock = $stockItem->getStockItem($productId);
+$stockStatus= $productStock->getData('is_in_stock');
+$product = $objectManager->create('Magento\Catalog\Model\Product')->load($productId);
+
+//echo $child->getID();
+//$product->getResource()->getAttribute('size')->getFrontend()->getValue($product); 
+//echo $product->getSize()->; 
+if($stockStatus==0) { $cId[]=$child['child_id']; $flag=1; $outproduct[]=$product->getName();
+
+ $imageUrl[] = $_imageHelper->init($product, 'small_image', ['type'=>'small_image'])->keepAspectRatio(true)->resize('150','150')->getUrl();
+ $price[]=$priceHelper->currency($product->getPrice(), true, false);
+}
+
+}
+
+?>
+<?php if($flag==1) : ?>
+ <div class="stockalert" id="block-stockalert">
+     <input type="hidden" class="notify-parent_prod_id" value="<?php echo $_product->getId() ?>"/>
+            <input type="hidden" class="notify-option_html" value=""/>
+            <input type="hidden" class="notify-product_id" value=""/>
+    
+    
+            <div class="title" data-role="title">
+                <strong id="block-stockalert-heading" role="heading" aria-level="2">Not got your Product?</strong>
+            </div>
+            <div class="content" id="form-container" data-role="content" aria-labelledby="block-stockalert-heading">
+               
+                                        <div class="bss_productstockaler applied">
+                         <div class="field">
+                            <div class="control">
+                             <select id="size" onchange=showDiv(this.value)>
+                                <option value="0">Pick Your Product</option>
+                                <?php $i=0; foreach($outproduct as $sz) : ?>
+                                <option value="<?php echo $cId[$i++] ?>"><?php echo $sz ?></option>
+                                <?php endforeach ?>
+                             </select>
+                            </div>
+                        </div>
+                        
+                        <div class="other_info">
+                             <?php $i=0; foreach($outproduct as $sz) : ?>
+                            
+                            <div id="info_<?php echo $cId[$i] ?>" style="display: none;">
+                             <div class="img">  <img src="<?php echo $imageUrl[$i] ?>"></div> 
+                              <div class="p-name">  <?php echo $outproduct[$i] ?></div>
+                                <span class="prc">
+                                    <?php echo $price[$i++] ?>
+                                </span>
+                            </div>
+                                 <?php endforeach ?>
+                         </div>
+                        
+                        <div class="field">
+                            <div class="control">
+                                <input type="text" class="input-text notify-email" id="stockalert_email" name="stockalert_email" value="" placeholder="Your Email">
+                            </div>
+                        </div>
+                        <!-- BLOCK captcha --><!-- /BLOCK captcha -->                                                <div class="actions-toolbar padding">
+                            <div>
+                                <button class="action notify primary" type="button" id="product-notify-button" value="Notify">
+                                    <span>Email me when back in stock</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                                   
+            </div>    
+        </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <script type="text/javascript">
+    
+    
+      function showDiv(str)
+    {
+     <?php $i=0; foreach($outproduct as $sz) : ?>
+          document.getElementById('info_'+'<?php echo $cId[$i++] ?>').style.display="none";
+     <?php endforeach ?>
+         
+        document.getElementById('info_'+str).style.display="block";
+        
+    }
+    
+    
+require(["jquery"], function($) {
+    
+    
+     function isEmailAddress(str) {
+        var pattern =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        //return pattern.test(str);  // returns a boolean
+        return true;
+    }
+    
+  
+    $(function() {
+        
+         $("#product-notify-button").on('click', function() {
+                        
+            $('.notify-email').removeClass('validation-failed');
+            if(isEmailAddress($('.notify-email').val()) && $('#size :selected').val()>0){
+                //$("#product-notify-button").prop('disabled',true);
+                
+             //   var sizeName = $('#size :selected').val();
+                
+             // alert(sizeName);
+                
+                
+                jQuery.ajax({
+                    data:'parent_pid='+$('.notify-parent_prod_id').val()+'&option_html='+$('#size :selected').text()+'&pid='+ $('#size :selected').val()+'&email='+$('.notify-email').val(),
+                     type:'post',
+                     //dataType:'json',
+                     showLoader: true,
+                     url:'<?php echo $url ?>notifyme/index/', 
+                     success:function(response){
+                        $('.prod-name').html(response);
+                        $('.modal').show();
+                       // window.location='<?php echo $_product->getProductUrl()?>';
+                       //window.location = 'https://mere.webpreview.co';
+                     $("#product-notify-button").prop('disabled',true);
+                      $(".notify-email").prop('disabled',true);
+                      $(".notify-email").val('');
+                     },
+                     error:function (XMLHttpRequest, textStatus, errorThrown) {
+                             if (textStatus == 'timeout'){}
+                             else if (textStatus == 'error'){}
+                             else if (textStatus == 'parsererror'){}
+                     }
+                  });
+            }else{
+                $('.notify-email').addClass('validation-failed');
+            }
+            
+            
+        });
+         
+           $(".close").on('click', function() {
+              $('.modal').hide();
+            });
+           
+            $("#cls").on('click', function() {
+              $('.modal').hide();
+            });
+         
+});
+    
+   
+});
+
+
+</script>
+
+
+ <div id="myModal" class="modal" style="display: none">
+            <div class="modal-content">
+                <span class="close">Close <span>&times;</span></span>
+             
+                <?php echo $block->getLayout()->createBlock(\Magento\Cms\Block\Block::class)->setBlockId('notification-msg')->toHtml();?>
+               <div class="prod-name"> </div>
+            
+                <div class="button-set">
+                            <div class="actions" id="cls"><a href="#">Continue Shopping</a></div>
+                </div>
+            </div>
+
+    </div>
+
+ 
+ 
+ <?php endif ?>
+ 
+ 
+  
+ <?php endif ?>
+ 
+ 
+ 
+ 
+ 

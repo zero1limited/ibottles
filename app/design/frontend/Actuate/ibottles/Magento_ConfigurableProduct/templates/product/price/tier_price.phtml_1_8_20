@@ -1,0 +1,43 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<script type="text/x-magento-template" id="tier-prices-template">
+     <%  var i=0; var j=0; var items=new Array() ; %>
+        <% _.each(tierPrices, function(item, key) { items[i]=item.qty-1; i++  %>
+       <% }); items[i]='+'; j=i;  %>
+       <div class="tier-title">Individual unit prices:</div>
+    <ul class="prices-tier items">
+        <% var i=0 ; %>
+        <% _.each(tierPrices, function(item, key) { i++; %>
+        <%  var priceStr = '<span class="price-container price-tier_price">'
+               
+               
+                + '<span class="price">' + priceUtils.formatPrice(item.price, currencyFormat) + ' ea.</span>'
+               
+            + '</span>'; %>
+       
+        
+        <li class="item" <% if(i%2==0) { %>  style="background: #fff" <% } %> >
+        <% if(i<j) { %> 
+            <%= '<?= $block->escapeHtml(__(' %1 - %3 %2  ', '%1', '%2')) ?>'
+            .replace('%1', item.qty)
+            .replace('%2', priceStr)
+           .replace('%3', items[i])  %> <% } else { %>
+           
+           <%= '<?= $block->escapeHtml(__(' %1  %3 %2  ', '%1', '%2')) ?>'
+            .replace('%1', item.qty)
+            .replace('%2', priceStr)
+           .replace('%3', items[i])   %> <% } %>
+          
+        </li>
+        <% }); %>
+        <li class="foot">For larger quantities, please email <a href="mailto:sales@ibottles.co.uk">sales@ibottles.co.uk</a> or call <a href="tel:01298 815 000">01298 815 000</a>.</li>
+    </ul>
+    
+
+
+</script>
+<div data-role="tier-price-block"></div>

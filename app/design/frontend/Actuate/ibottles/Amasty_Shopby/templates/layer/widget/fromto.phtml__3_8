@@ -1,0 +1,217 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+?>
+<?php
+    /** @var \Amasty\ShopbyBase\Model\FilterSetting $filterSetting */
+    /** @var \Amasty\Shopby\Block\Navigation\Widget\FromTo $block */
+?>
+<?php
+    $postfix = '_' . uniqid();
+    $filterCode = $block->escapeHtml($filterSetting->getFilterCode());
+    $min = $block->escapeHtml($fromToConfig['min']);
+    $max = $block->escapeHtml($fromToConfig['max']);
+    $from = $fromToConfig['from'];
+    $to = $fromToConfig['to'];
+    $step = $fromToConfig['step'];
+    $fromToType = $block->getWidgetType();
+?>
+<div id="am-filter-widget-<?= /* @noEscape */ $filterCode . $postfix;?>"
+     class="am-filter-items-<?= /* @noEscape */ $filterCode;?>"
+     data-am-js="fromto-widget">
+    <form
+        data-amshopby-filter="<?= /* @noEscape */ $filterCode;?>"
+        data-amshopby-filter-request-var="<?= /* @noEscape */ $block->getFilter()->getRequestVar(); ?>">
+        <input
+            <?php if ($from !== null && $to !== null) :?>
+                value="<?= /* @noEscape */ $from . '-' . $to;?>"
+            <?php else :?>
+             value="3.00-3.00"
+            
+            <?php endif; ?>
+            type="hidden"
+            data-amshopby-fromto="value"
+            id="amshopby-<?= $block->escapeHtml($block->getFilter()->getRequestVar())?>"
+            name="amshopby[<?= $block->escapeHtml($block->getFilter()->getRequestVar())?>][]"/>
+        <div class="range am-fromto-widget amshopby_currency_rate"
+             data-rate="<?= /* @noEscape */ $fromToConfig['curRate'];?>">
+             
+             <?php if ($block->escapeHtml($block->getFilter()->getRequestVar())=='capacity') : ?>
+             
+             <?php
+             $prefix=$block->escapeHtml($block->getFilter()->getRequestVar());
+               $bottle_capacity = array(
+        "3ml" => 3,
+        "5ml" => 5,
+        "10ml" => 10,
+        "15ml" => 15,
+        "20ml" => 20,
+        "40ml" => 40,
+        "60ml" => 60,
+        "80ml" => 80,
+        "1 Litre" => 1000,
+        "5 Litre" => 5000,
+        "10 Litre" => 10000,
+        "20 Litre" => 20000,
+        "30 Litre" => 30000,
+        "40 Litre" => 40000,
+        "50 Litre" => 50000,
+        "60 Litre" => 60000,
+        "120 Litre" => 120000,
+        "150 Litre" => 150000,
+        "220 Litre" => 220000,
+            );
+             
+             ?>
+            
+             
+              <select id="am-from"  onchange="getvalfrom(this.value);" class="am-filter-price -from input-text">
+                    <?php
+                    foreach ($bottle_capacity as $k => $v) {
+                        ?>
+                        <option value="<?php echo $v; ?>" ><?php echo $k; ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+              <span class="delimiter">to</span>
+            <select id="am-to"  class="am-filter-price -to input-text" onchange="getvalto(this.value);">
+                    <?php
+                    foreach ($bottle_capacity as $k => $v) {
+                        ?>
+                        <option value="<?php echo $v; ?>" ><?php echo $k; ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+                
+             <?php else : ?>
+             
+                 <input
+                class="am-filter-price -from input-text"
+                data-amshopby-fromto="from"
+                data-validate-data="{'validate-number':true}"
+                type="number"
+                placeholder="<?= $block->escapeHtml(__('From'))?>"/>
+            <span class="delimiter">to</span>
+            <input
+                class="am-filter-price -to input-text"
+                data-amshopby-fromto="to"
+                data-validate-data="{'validate-number':true}"
+                type="number"
+                placeholder="<?= $block->escapeHtml(__('To'))?>"
+                />
+             
+             <?php endif ?>
+                
+                
+            <?php if (!$block->collectFilters()) :?>
+                <button class="am-filter-go"
+                        title="<?= $block->escapeHtml(__('Search'));?>"
+                        data-amshopby-fromto="go">
+                    <?= $block->escapeHtml(__('Search'))?>
+                </button>
+            <?php endif;?>
+        </div>
+    </form>
+</div>
+
+
+
+ <?php 
+$phoneChunks = "";
+ if ($from !== null && $to !== null) :
+ ?>
+ <script>
+    var curval = document.getElementById("amshopby-capacity").value ;
+    var chunks = curval.split("-");
+    
+    //alert(chunks[0]);
+    
+    var temp = parseInt(chunks[0]);
+var mySelect = document.getElementById('am-from');
+
+
+ // alert(temp) ;
+  
+  
+  for( j = 0; j<=18 ; j++) {
+    i = mySelect.options[j];
+    if(i.value == temp) {
+        mySelect.selectedIndex = j;
+        break;
+    }
+}
+   
+   
+     var temp = parseInt(chunks[1]);
+var mySelect = document.getElementById('am-to');
+
+
+ //alert(temp) ;
+  
+  
+  for( j = 0; j<=18 ; j++) {
+    i = mySelect.options[j];
+    if(i.value == temp) {
+        mySelect.selectedIndex = j;
+        break;
+    }
+}  
+    
+ </script>
+    <?php
+
+endif;
+
+?>
+
+
+
+
+<script>
+   function getvalfrom(sel)
+{
+    
+    var curval = document.getElementById("amshopby-capacity").value ;
+    var chunks = curval.split("-");
+    
+    //alert(chunks[2]);
+    
+   document.getElementById("amshopby-capacity").value = sel +'-'+chunks[1]; 
+}
+
+ function getvalto(sel)
+{
+     var curval = document.getElementById("amshopby-capacity").value ;
+    var chunks = curval.split("-");
+    
+   // alert(curval);
+    
+   document.getElementById("amshopby-capacity").value = chunks[0]+ '-'+ sel; 
+}
+    
+</script>
+
+<script type="text/x-magento-init">
+{
+    "#am-filter-widget-<?= /* @noEscape */ $filterCode . $postfix;?>": {
+        "amShopbyFilterFromTo": {
+                "enabled": <?= /* @noEscape */ ($filterSetting->getAddFromToWidget() ? '1' : '0')?>,
+                "collectFilters": <?= /* @noEscape */ $block->collectFilters();?>,
+                "from":"<?= /* @noEscape */ $from;?>",
+                "to":"<?= /* @noEscape */ $to;?>",
+                "min":"<?= /* @noEscape */ $min;?>",
+                "max":"<?= /* @noEscape */ $max;?>",
+                "code":"<?= $block->escapeHtml($filterSetting->getAttributeModel()->getAttributeCode()); ?>",
+                "isSlider": <?= /* @noEscape */ ($fromToType == 'slider' ? '1' : '0')?>,
+                "isDropdown": <?= /* @noEscape */ ($fromToType == 'dropdown' ? '1' : '0')?>,
+                "url": "<?= /* @noEscape */ $block->getSliderUrlTemplate(); ?>",
+                "step":<?= /* @noEscape */ ($fromToType == 'slider' ? $block->escapeHtml((float)($step)) : '0') ?>
+        }
+    }
+}
+</script>

@@ -1,0 +1,83 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<script type="text/x-magento-template" id="tier-prices-template">
+     <%  var i=0; var j=0; var items=new Array() ; %>
+        <% _.each(tierPrices, function(item, key) { items[i]=item.qty-1; i++  %>
+       <% }); items[i]='+'; j=i;  %>
+     
+    <ul class="prices-tier items">
+        <% var i=0 ; %>
+        <% _.each(tierPrices, function(item, key) { i++; %>
+        <%  var priceStr = '<span class="price-container price-tier_price">'
+               
+               
+                + '<span class="price">' + priceUtils.formatPrice(item.price, currencyFormat) + ' ea.</span>'
+               
+            + '</span>'; %>
+       
+         <li class="title">Individual unit prices:</li>
+         
+        <li class="item" <% if(i%2==0) { %>  style="background: #fff" <% } %> >
+        <% if(i<j) { %> 
+            <%= '<?= $block->escapeHtml(__(' %1 - %3 %2  ', '%1', '%2')) ?>'
+            .replace('%1', item.qty)
+            .replace('%2', priceStr)
+           .replace('%3', items[i])  %> <% } else { %>
+           
+           <%= '<?= $block->escapeHtml(__(' %1  %3 %2  ', '%1', '%2')) ?>'
+            .replace('%1', item.qty)
+            .replace('%2', priceStr)
+           .replace('%3', items[i])   %> <% } %>
+          
+        </li>
+        <% }); %>
+        <li class="foot">For larger quantities, please email <a href="mailto:sales@ibottles.co.uk">sales@ibottles.co.uk</a> or call <a href="tel:01298 815 000">01298 815 000</a>.</li>
+    </ul>
+    
+
+
+</script>
+<div data-role="tier-price-block" id="tier-price-id" style="display: block" >
+    
+</div>
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product
+    $pid= $product->getId();
+       $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+    $url=$storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+?>
+<script>
+    
+    setTimeout(function(){ document.getElementById("tier-price-id").style.display = "block";
+             
+             var pid=<?php echo $pid ?>
+               
+         jQuery.ajax({
+        url: "<?php echo $url ?>banner/index/tier",
+        type: "post",
+        data: {pid: pid},
+        success: function (response) {
+
+          res= response;
+            jQuery("#tier-price-id").html(res);
+            
+             
+            
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+  
+         
+                 });
+               
+               
+               }, 1000);
+      
+</script>
+
