@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a21913392a5b650d4f084d6b4bef7b9",
+    "content-hash": "19a7e38d20380a92192d4e5aa2f06fad",
     "packages": [
         {
             "name": "amasty/amcart",
@@ -14674,6 +14674,46 @@
                 "framework"
             ],
             "time": "2019-11-26T15:09:40+00:00"
+        },
+        {
+            "name": "mdoq/module-connector",
+            "version": "1.4.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zero1limited/magento2-Mdoq-Connector.git",
+                "reference": "40cd22c87aa1ef12a3af475f7b5fd63520eb91af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zero1limited/magento2-Mdoq-Connector/zipball/40cd22c87aa1ef12a3af475f7b5fd63520eb91af",
+                "reference": "40cd22c87aa1ef12a3af475f7b5fd63520eb91af",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.5.0|~5.6.0|^7.0.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Mdoq\\Connector\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Enables you to use Mdoq for your magento site",
+            "homepage": "https://www.mdoq.io",
+            "keywords": [
+                "Mdoq",
+                "devops",
+                "magento",
+                "magento 2"
+            ],
+            "time": "2020-04-16T15:17:55+00:00"
         },
         {
             "name": "monolog/monolog",
