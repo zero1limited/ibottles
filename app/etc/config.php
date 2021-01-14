@@ -287,7 +287,7 @@ return [
         'Lillik_PriceDecimal' => 1,
         'Magento_PaypalReCaptcha' => 1,
         'MSP_TwoFactorAuth' => 1,
-        'Mageplaza_Core' => 0,
+        'Mageplaza_Core' => 1,
         'Mageplaza_BetterMaintenance' => 0,
         'Staempfli_ImageResizer' => 1,
         'StripeIntegration_Payments' => 1,
