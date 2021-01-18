@@ -288,7 +288,7 @@ return [
         'Magento_PaypalReCaptcha' => 1,
         'MSP_TwoFactorAuth' => 1,
         'Mageplaza_Core' => 1,
-        'Mageplaza_BetterMaintenance' => 1,
+        'Mageplaza_BetterMaintenance' => 0,
         'Staempfli_ImageResizer' => 1,
         'StripeIntegration_Payments' => 1,
         'Temando_ShippingRemover' => 1,
