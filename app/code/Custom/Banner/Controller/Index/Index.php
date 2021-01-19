@@ -69,7 +69,8 @@ class Index extends \Magento\Framework\App\Action\Action
 				}
 				
 				$str.='<ul>';
-			echo  $str;		
+			die($str);		
+			//return  $str;		
 				
 		}
         
