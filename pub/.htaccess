@@ -148,14 +148,6 @@
     RewriteRule .* - [L,R=405]
 
 ############################################
-## Redirect to secure URLs
-
-    RewriteCond %{HTTP:X-Forwarded-Proto} !=https
-    RewriteCond %{HTTPS} !=on
-    RewriteCond %{REQUEST_METHOD} !=POST
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-############################################
 ## Never rewrite for existing files, directories and links
 
     RewriteCond %{REQUEST_FILENAME} !-f

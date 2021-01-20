@@ -1,3 +1,8 @@
+/.github
+/dev
+/mdoq
+!/mdoq/env.sh
+._.DS_Store
 /blog
 /wp
 /.buildpath

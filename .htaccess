@@ -169,14 +169,6 @@
     #RewriteRule ^(.*)$ /mobiledirectoryhere/ [L,R=302]
 
 ############################################
-## Redirect to secure URLs
-
-    RewriteCond %{HTTP:X-Forwarded-Proto} !=https
-    RewriteCond %{HTTPS} !=on
-    RewriteCond %{REQUEST_METHOD} !=POST
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-############################################
 ## never rewrite for existing files, directories and links
 
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -391,9 +383,6 @@
 ErrorDocument 404 /pub/errors/404.php
 ErrorDocument 403 /pub/errors/404.php
 
-
-
-
 ################################
 ## If running in cluster environment, uncomment this
 ## http://developer.yahoo.com/performance/rules.html#etags
@@ -434,16 +423,3 @@ ErrorDocument 403 /pub/errors/404.php
     </FilesMatch>
 
 </IfModule>
-
-# php -- BEGIN cPanel-generated handler, do not edit
-# Set the “ea-php72” package as the default “PHP” programming language.
-<IfModule mime_module>
-  AddHandler application/x-httpd-ea-php72 .php .php7 .phtml
-</IfModule>
-# php -- END cPanel-generated handler, do not edit
-
-
-
-
-
-Redirect 301 /1botl0g1n /no-route
