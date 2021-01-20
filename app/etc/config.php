@@ -276,6 +276,7 @@ return [
         'Amazon_Login' => 0,
         'Amazon_Payment' => 0,
         'Custom_Banner' => 1,
+        'Custom_Csp' => 1,
         'Custom_Notifyme' => 1,
         'Dotdigitalgroup_Email' => 0,
         'Dotdigitalgroup_Chat' => 0,
