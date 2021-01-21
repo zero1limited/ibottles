@@ -6,6 +6,18 @@
  * See COPYING.txt for license details.
  */
 
+if(php_sapi_name() != 'cli' && is_file(__DIR__.'/../var/.maintenance.flag')){
+       $fileToUse = __DIR__.'/../var/maintenance/default_maintenance.html';
+       if(isset($_SERVER['MAGE_RUN_CODE'])){
+           if(is_file(__DIR__.'/../var/maintenance/'.$_SERVER['MAGE_RUN_CODE'].'.html')){
+                   $fileToUse = __DIR__.'/../var/maintenance/'.$_SERVER['MAGE_RUN_CODE'].'.html';
+           }
+       }
+       http_response_code(503);
+    include ($fileToUse);
+    exit();
+}
+
 use Magento\Framework\App\Bootstrap;
 use Magento\Framework\App\Filesystem\DirectoryList;
 
