@@ -22,8 +22,6 @@ $mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 			$date = strtotime($objDate->gmtDate());
 
 			$closedate = strtotime('2021-01-04 00:00:00'); 
-
-
 			$valcomp = strtotime('2021-02-01 10:00:00'); ?>
 
 <?php if($date > $valcomp) :?>
@@ -35,11 +33,6 @@ $mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 		</div>
 	</div>
 <?php endif ?>
-
-
-
-
-
 
 			<?php if($closedate > $date) :?>
 				<div class="singleslide">
