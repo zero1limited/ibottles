@@ -30,7 +30,7 @@ $helper = $this->helper(\Magento\Search\Helper\Data::class);
                            }'
                            type="text"
                            name="<?= $block->escapeHtmlAttr($helper->getQueryParamName()) ?>"
-                           value="<?= /* @noEscape */ $helper->getEscapedQueryText() ?>"
+                           value=""
                            placeholder="<?= $block->escapeHtmlAttr(__('Search....')) ?>"
                            class="input-text"
                            maxlength="<?= $block->escapeHtmlAttr($helper->getMaxQueryLength()) ?>"
