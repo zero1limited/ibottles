@@ -16,12 +16,22 @@ $mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 
 	<div class="bannersWrapper fade-in one">
 		<div class="homeSlider">
-
 			<?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 			$objDate = $objectManager->create('Magento\Framework\Stdlib\DateTime\DateTime');
 			$date = strtotime($objDate->gmtDate());
 
-			$closedate = strtotime('2021-01-04 00:00:00'); ?>
+			$closedate = strtotime('2021-01-04 00:00:00'); 
+			$valcomp = strtotime('2021-02-01 10:00:00'); ?>
+
+<?php if($date > $valcomp) :?>
+	<div class="singleslide">
+		<div class="wrapper">
+			<a href="https://www.facebook.com/ibottles2015" target="_blank">
+				<img src="<?php echo $mediaUrl ?>banners/banner-valentines-2021.jpg" alt="WebBanner">
+			</a>
+		</div>
+	</div>
+<?php endif ?>
 
 			<?php if($closedate > $date) :?>
 				<div class="singleslide">
