@@ -251,7 +251,7 @@ return [
         'Amasty_MostviewedGraphQl' => 1,
         'Amasty_Oaction' => 1,
         'Amasty_Paction' => 1,
-        'Amasty_PageSpeedOptimizer' => 1,
+        'Amasty_PageSpeedOptimizer' => 0,
         'Amasty_Promo' => 1,
         'Amasty_Rewards' => 0,
         'Amasty_Rgrid' => 1,

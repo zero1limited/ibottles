@@ -21,7 +21,25 @@ $mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 			$objDate = $objectManager->create('Magento\Framework\Stdlib\DateTime\DateTime');
 			$date = strtotime($objDate->gmtDate());
 
-			$closedate = strtotime('2021-01-04 00:00:00'); ?>
+			$closedate = strtotime('2021-01-04 00:00:00'); 
+
+
+			$valcomp = strtotime('2021-01-05 10:00:00'); ?>
+
+<?php if($date > $valcomp) :?>
+	<div class="singleslide">
+		<div class="wrapper">
+			<a href="#">
+				<img src="<?php echo $mediaUrl ?>banners/iBottles_Web Banner_Valentines_2021.jpg" alt="WebBanner">
+			</a>
+		</div>
+	</div>
+<?php endif ?>
+
+
+
+
+
 
 			<?php if($closedate > $date) :?>
 				<div class="singleslide">
@@ -32,6 +50,11 @@ $mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 					</div>
 				</div>
 			<?php endif ?>
+
+
+
+
+
 
 
 			<div class="singleslide">
