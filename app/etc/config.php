@@ -299,6 +299,9 @@ return [
         'Vertex_Tax' => 1,
         'Vertex_AddressValidation' => 1,
         'WebShopApps_MatrixRate' => 1,
-        'Yotpo_Yotpo' => 0
+        'Yotpo_Yotpo' => 0,
+        'Zero1_Base' => 1,
+        'Zero1_Patches' => 1,
+        'Zero1_ReleaseLibrary' => 1
     ]
 ];
