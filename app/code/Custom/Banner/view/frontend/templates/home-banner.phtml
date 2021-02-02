@@ -23,49 +23,17 @@ $mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 			$closedate = strtotime('2021-01-04 00:00:00'); 
 			$valcomp = strtotime('2021-02-01 10:00:00'); ?>
 
-<?php if($date > $valcomp) :?>
-	<div class="singleslide">
-		<div class="wrapper">
-			<a href="https://www.facebook.com/ibottles2015" target="_blank">
-				<img src="<?php echo $mediaUrl ?>banners/banner-valentines-2021.jpg" alt="WebBanner">
-			</a>
-		</div>
-	</div>
-<?php endif ?>
+<?php
+// These block ID's are a hangover from M1
+$banner1 = $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('home-hero-banner-1')->toHtml();
+$banner2 = $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('home-hero-banner-2')->toHtml();
+$banner3 = $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('home-hero-banner-3')->toHtml();
 
-			<?php if($closedate > $date) :?>
-				<div class="singleslide">
-					<div class="wrapper">
-						<a href="#">
-							<img src="<?php echo $mediaUrl ?>banners/iB_WebBanner_GuaranteedDelivery-100.jpg" alt="WebBanner">
-						</a>
-					</div>
-				</div>
-			<?php endif ?>
+?>
 
-
-			<div class="singleslide">
-				<div class="wrapper">
-					<img src="<?php echo $mediaUrl ?>banners/deliver-orders-5-7-days_1.jpg" alt="We can now deliver orders within 5-7 days">
-				</div>
-			</div>
-
-
-
-			<div class="singleslide">
-				<div class="wrapper">
-					<a href="https://www.ibottles.co.uk/products/postal-containers.html">
-						<img src="<?php echo $mediaUrl ?>banners/iBottles_PostalPack_NOV20-01.png" alt="PostalPack NOV20">
-					</a>
-				</div>
-			</div>
-
-			<div class="singleslide">
-				<div class="wrapper">
-					<img src="<?php echo $mediaUrl ?>banners/iBottles_Due_to_high_demand_web_banner.jpg" alt="Due to high demand: caps, tops and trigger sprays are only available to order with bottles">
-				</div>
-			</div>
-
+	<?php if($banner1):?><div class="singleslide"><div class="wrapper"><?php echo $banner1;?></div></div><?php endif;?>
+        <?php if($banner2):?><div class="singleslide"><div class="wrapper"><?php echo $banner2;?></div></div><?php endif;?>
+        <?php if($banner3):?><div class="singleslide"><div class="wrapper"><?php echo $banner3;?></div></div><?php endif;?>
 
 
 <?php /*
