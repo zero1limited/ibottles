@@ -46,6 +46,7 @@ class Index extends \Magento\Framework\App\Action\Action
           foreach ($relatedProducts as $relatedProduct) {
 			
 			$_product = $objectManager->create('Magento\Catalog\Model\Product')->load($relatedProduct->getId());
+			//echo $_product->getStatus();
 			
 			$formattedPrice = $priceHelper->currency($_product->getPrice(), true, false);
 			
