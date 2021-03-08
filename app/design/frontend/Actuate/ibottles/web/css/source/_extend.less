@@ -505,6 +505,7 @@ button {
 		left: 0;
 		top: 0;
 		z-index: 10005;
+		z-index: 900;
 		background: #fff;
 		padding-bottom: 11px;
 		.header.panel {
@@ -587,6 +588,7 @@ button {
 		left: 0;
 		top: 80px;
 		z-index: 10000;
+		z-index: 800;
 	}
 	.block-search {
 		padding-left: 0 !important;
@@ -3629,7 +3631,14 @@ button {
 	    }
 	}
 }
-
+.modal-popup {
+	.action-close {
+		min-width: 0;		
+	}
+}
+.modal-popup.confirm .modal-inner-wrap .modal-content {
+	padding-right: 3rem;
+}
 .catalog-product-view {
 	.modal {
 		position: fixed;
@@ -3642,10 +3651,10 @@ button {
 	}
 	.modal-content {
 		background: #fff;
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%,-50%);
+		// position: absolute;
+		// left: 50%;
+		// top: 50%;
+		// transform: translate(-50%,-50%);
 		max-width: 600px;
 		width: 100%;
 		padding: 20px;
