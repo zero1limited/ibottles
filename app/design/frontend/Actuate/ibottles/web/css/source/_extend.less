@@ -1151,6 +1151,10 @@ button {
 		max-width: 1200px;
 		padding: 0 20px;
 		margin: 0 auto;
+		.trustpilot-widget {
+			position:static!important;
+			/* the inline "relative" value was causing z-index issues with minicart */
+		}
 		#trustpilot-widget-trustbox-2-wrapper {
 			padding: 16px 0;
 		}
@@ -3632,10 +3636,15 @@ button {
 	}
 }
 .modal-popup {
-	.action-close {
-		min-width: 0;		
+	&._show {
+		z-index: 2000!important;
+		/* gets it over the cart popup, for removing items, have to add !important to override core inline value */
+	}
+	button {
+		min-width: 0;
 	}
 }
+
 .modal-popup.confirm .modal-inner-wrap .modal-content {
 	padding-right: 3rem;
 }
